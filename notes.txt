@@ -1,0 +1,27 @@
+Steps:
+- change password in DataManager/DBController.php
+
+************ PRITAM ************ 
+
+Done:
+
+BranchDataManager
+PersonDataManager
+PublisherDataManager
+ReaderDataManager
+
+TestScreens:
+Branch, Person, Publisher, Reader
+
+-----------------------------------
+
+Next:
+Documents with subclasses
+
+-----------------------------------
+
+Questions:
+(1) ID -> shouldn't we use auto increment?
+(2) Need to create constraints ..
+
+----------------------------------------------------------------------
