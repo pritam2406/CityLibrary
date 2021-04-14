@@ -5,18 +5,15 @@ require_once("DBController.php");
     
 class ReaderDataManager
 {
-    public static function insertReader($RID, $ReaderType, $ReaderName, $ReaderAddress, $ReaderPhone) {
+    public static function insertReader($ReaderType, $ReaderName, $ReaderAddress, $ReaderPhone) {
         
         $query = "INSERT INTO READER";
         $attributes = "(";
         $values = " VALUES (";
         
-        $attributes .= "RID";
-        $values .= "".$RID."";
-        
         if($ReaderType != null) {
-            $attributes .= ", RTYPE";
-            $values .= ", ".$ReaderType."";
+            $attributes .= "RTYPE";
+            $values .= "".$ReaderType."";
         }
         if($ReaderName != null) {
             $attributes .= ", RNAME";

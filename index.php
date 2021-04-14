@@ -34,6 +34,8 @@
                         <a href="TestScreens/ReaderTestScreen.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i>Reader Test Screen</a>
                         <a href="TestScreens/PersonTestScreen.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i>Person Test Screen</a>
                         <a href="TestScreens/PublisherTestScreen.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i>Publisher Test Screen</a>
+                        <a href="TestScreens/AdminHelperTestScreen.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i>Admin Helper Test Screen</a>
+                        <a href="TestScreens/ReaderHelperTestScreen.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i>Reader Helper Test Screen</a>
                     </div>
                 </div>
             </div>        

@@ -3,25 +3,16 @@ Steps:
 
 ************ PRITAM ************ 
 
-Done:
-
-BranchDataManager
-PersonDataManager
-PublisherDataManager
-ReaderDataManager
-
-TestScreens:
-Branch, Person, Publisher, Reader
-
 -----------------------------------
 
 Next:
 Documents with subclasses
+Add auto increments
+Add constraints
 
 -----------------------------------
 
 Questions:
-(1) ID -> shouldn't we use auto increment?
-(2) Need to create constraints ..
+(1) CEditor -> refers to Person?
 
 ----------------------------------------------------------------------

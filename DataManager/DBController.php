@@ -29,6 +29,7 @@ class DBController {
 	}
 	
 	function runSelectQuery($query) {
+        //echo $query;
 		$result = mysqli_query($this->conn,$query);
         
 //		while($row=mysqli_fetch_assoc($result)) {
@@ -50,6 +51,7 @@ class DBController {
         if($result != 1) {
             echo("<br> <b> Error description: " . mysqli_error($this->conn)). "</b> <br>";
         }
+        //mysqli_insert_id($con);
 		return $result;
 	}
 	
