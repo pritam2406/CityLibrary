@@ -6,23 +6,17 @@ require_once("DBController.php");
     
 class BranchDataManager {
     
-    public static function createBranch($BID, $BranchName, $BranchLocation) {
+    public static function createBranch($BranchName, $BranchLocation) {
         $query = "INSERT INTO BRANCH";
         $attributes = "(";
         $values = " VALUES (";
-        
-        $attributes .= "BID";
-        $values .= "".$BID."";
-        
-        if($BranchName != null) {
-            $attributes .= ", LNAME";
-            $values .= ", '".$BranchName."'";
-        }
-        if($BranchLocation != null) {
-            $attributes .= ", LOCATION";
-            $values .= ", '".$BranchLocation."'";
-        }
-        
+    
+        $attributes .= "LNAME";
+        $values .= "'".$BranchName."'";
+
+        $attributes .= ", LOCATION";
+        $values .= ", '".$BranchLocation."'";
+
         $attributes .= ")";
         $values .= ")";
         

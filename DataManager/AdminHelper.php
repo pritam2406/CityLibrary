@@ -3,19 +3,23 @@
 include('CommonDataManager.php');
 include('BranchDataManager.php');
 include('ReaderDataManager.php');
+include('PublisherDataManager.php');
+include('PersonDataManager.php');
+include('DocumentDataManager.php');
+include('DocumentCopyDataManager.php');
 
 class AdminHelper {
     
     //- Add a document copy.
     public static function addDocCopy($docID, $copyNo, $BID, $position)
     {
-        
+        return DocumentCopyDataManager::insertDocCopy($docID, $copyNo, $BID, $position);
     }
     
-    //- Add new reader.
-    public static function addReader($ReaderType, $ReaderName, $ReaderAddress, $ReaderPhone)
+    //- Add a reader
+    public static function addReader($readerType, $readerName, $readerAddress, $readerPhone)
     {
-        return ReaderDataManager::insertReader($ReaderType, $ReaderName, $ReaderAddress, $ReaderPhone);
+        return ReaderDataManager::insertReader($readerType, $readerName, $readerAddress, $readerPhone);
     }
     
     //- Print branch information (name and location).
@@ -67,6 +71,51 @@ class AdminHelper {
     }
     
 //-------------------------------------------------------------//
+    
+    public static function insertPublisher($publisherName, $publisherAddress)
+    {
+        return PublisherDataManager::createPublisher($publisherName, $publisherAddress);
+    }
+    
+    public static function getAllPublishers()
+    {
+        return PublisherDataManager::getAllPublishers();
+    }
+    
+    public static function insertPerson($personName)
+    {
+        return PersonDataManager::createPerson($personName);
+    }
+    
+    public static function getAllPersons()
+    {
+        return PersonDataManager::getAllPersons();
+    }
+    
+    public static function insertBranch($branchName, $branchLocation)
+    {
+        return BranchDataManager::createBranch($branchName, $branchLocation);
+    }
+    
+    public static function insertBook($title, $pDate, $publisherID, $ISBN, $authorPIDs)
+    {
+        return DocumentDataManager::insertBook($title, $pDate, $publisherID, $ISBN, $authorPIDs);
+    }
+    
+    public static function insertProceedings($title, $pDate, $publisherID, $cDate, $cLocation, $cEditorID, $chairIDs)
+    {
+        return DocumentDataManager::insertProceedings($title, $pDate, $publisherID, $cDate, $cLocation, $cEditorID, $chairIDs);
+    }
+    
+    public static function insertJournalVolume($title, $pDate, $publisherID, $volumeNo, $editorID)
+    {
+        return DocumentDataManager::insertJournalVolume($title, $pDate, $publisherID, $volumeNo, $editorID);
+    }
+    
+    public static function insertJournalIssue($docID, $issueNo, $scope, $guestEditorPIDs)
+    {
+        return DocumentDataManager::insertJournalIssue($docID, $issueNo, $scope, $guestEditorPIDs);
+    }
 }
 ?>
 

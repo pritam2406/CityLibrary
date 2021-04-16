@@ -44,27 +44,79 @@ include('../DataManager/AdminHelper.php');
     else if(array_key_exists('avgFineInPeriod', $_POST)) {
         avgFineInPeriod();
     }
+    else if(array_key_exists('insertBook', $_POST)) {
+        insertBook();
+    }
+    else if(array_key_exists('insertProceeding', $_POST)) {
+        insertProceeding();
+    }
+    else if(array_key_exists('insertJournalVolume', $_POST)) {
+        insertJournalVolume();
+    }
+    else if(array_key_exists('insertBranch', $_POST)) {
+        insertBranch();
+    }
+    
+    function insertBranch()
+    {
+        AdminHelper::insertBranch("Branch1", "BranchLocation1");
+    }
+    function addReader()
+    {
+        AdminHelper::addReader(1, "ReaderName1", "ReaderAddress1", "123456789");
+    }
+    
+    function insertBook()
+    {
+        $pubID = AdminHelper::insertPublisher("PublisherName1", "PublisherAddress1");
+        
+        $pID1 = AdminHelper::insertPerson("PersonName1");
+        $pID2 = AdminHelper::insertPerson("PersonName2");
+        $pID3 = AdminHelper::insertPerson("PersonName3");
+        
+        $authorPIDs = array($pID1, $pID2, $pID3);
+        
+        AdminHelper::insertBook("Book1", '2021-01-05', $pubID, "ISBN1", $authorPIDs);
+    }
+    
+    function insertProceeding()
+    {
+        $pubID = AdminHelper::insertPublisher("PublisherName2", "PublisherAddress2");
+        
+        $pID4 = AdminHelper::insertPerson("PersonName4");
+        $pID5 = AdminHelper::insertPerson("PersonName5");
+        $pID6 = AdminHelper::insertPerson("PersonName6");
+        
+        $chairPIDs = array($pID4, $pID5, $pID6);
+        
+        $pID7 = AdminHelper::insertPerson("PersonName7");
+        
+        AdminHelper::insertProceedings("Proceeding1", '2021-01-11', $pubID, '2021-01-02', 'Kearny', $pID7, $chairPIDs);
+    }
+    
+    function insertJournalVolume()
+    {
+        $pubID = AdminHelper::insertPublisher("PublisherName3", "PublisherAddress3");
+        
+        $pID8 = AdminHelper::insertPerson("PersonName8");
+        
+        $docID = AdminHelper::insertJournalVolume("JournalVolume1", '2021-01-11', $pubID, 1, $pID8);
+        
+        $pID9 = AdminHelper::insertPerson("PersonName9");
+        $pID10 = AdminHelper::insertPerson("PersonName10");
+        $guest1PIDs = array($pID9, $pID10);
+        AdminHelper::insertJournalIssue($docID, 1, "scope1", $guest1PIDs);
+        
+        $pID11 = AdminHelper::insertPerson("PersonName11");
+        $pID12 = AdminHelper::insertPerson("PersonName12");
+        $guest2PIDs = array($pID11, $pID12);
+        AdminHelper::insertJournalIssue($docID, 2, "scope2", $guest2PIDs);
+    }
     
     function addDocCopy() {
-//        $res = BranchDataManager::createBranch("1", "LNAME1", "LOCATION1");
-//        if($res == 1) {
-//            echo "Branch created with BID 1";
-//        }
-//        else {
-//            echo "Branch not created";
-//        }
+        $res = AdminHelper::addDocCopy(10, 1, 1, "A1B2C3");
     }
-    function addReader() {
-//        $res = BranchDataManager::getAllBranches();
-//        if(count($res) == 0) {
-//            echo "No Branch";
-//        }
-//        else {
-//            foreach($res as $branch) {
-//                echo "BranchName : ".$branch->getBranchName().", BranchLocation: ".$branch->getBranchLocation()."<br>" ;
-//            }
-//        }
-    }
+
     function printBranchInfo() {
         $res = AdminHelper::printBranchInfo("1");
         if($res == null) {
@@ -178,6 +230,10 @@ include('../DataManager/AdminHelper.php');
                     <input type="submit" name="mostBorrowedDocsByBranch" class="button" value="Most Borrowed Docs By Branch" />
                     <input type="submit" name="mostPopular10DocsOfYear" class="button" value="Most Popular 10 Docs of Year" />
                     <input type="submit" name="avgFineInPeriod" class="button" value="Avg Fine In Period" />
+                    <input type="submit" name="insertBook" class="button" value="Insert Book" />
+                    <input type="submit" name="insertProceeding" class="button" value="Insert Proceeding" />
+                    <input type="submit" name="insertJournalVolume" class="button" value="Insert Journal Volume" />
+                    <input type="submit" name="insertBranch" class="button" value="Insert Branch" />
                 </form>
             </div>
         </div>

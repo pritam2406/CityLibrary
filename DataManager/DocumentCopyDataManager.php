@@ -4,7 +4,7 @@ require_once("DBController.php");
 
 class DocumentCopyDataManager
 {
-    public static insertDocCopy($DocID, $CopyNo, $BID, $Position)
+    public static function insertDocCopy($DocID, $CopyNo, $BID, $Position)
     {
         $query = "INSERT INTO COPY";
         $attributes = "(";
@@ -34,12 +34,12 @@ class DocumentCopyDataManager
         return $res;
     }
     
-    public static getDocCopiesByBranch($DocID, $BID)
+    public static function getDocCopiesByBranch($DocID, $BID)
     {
         //array of copy numbers
     }
     
-    public static availableDocsForReader($RID)
+    public static function availableDocsForReader($RID)
     {
         //$DOCID, $CopyNO, $BID, $Position, $isBorrowed
     }

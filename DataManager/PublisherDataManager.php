@@ -5,23 +5,17 @@ require_once("DBController.php");
     
 class PublisherDataManager
 {
-    public static function createPublisher($PubID, $PublisherName, $PublisherAddress) {
+    public static function createPublisher($PublisherName, $PublisherAddress) {
         $query = "INSERT INTO PUBLISHER";
         $attributes = "(";
         $values = " VALUES (";
         
-        $attributes .= "PUBLISHERID";
-        $values .= "".$PubID."";
-        
-        if($PublisherName != null) {
-            $attributes .= ", PUBNAME";
-            $values .= ", '".$PublisherName."'";
-        }
-        if($PublisherAddress != null) {
-            $attributes .= ", ADDRESS";
-            $values .= ", '".$PublisherAddress."'";
-        }
-        
+        $attributes .= "PUBNAME";
+        $values .= "'".$PublisherName."'";
+
+        $attributes .= ", ADDRESS";
+        $values .= ", '".$PublisherAddress."'";
+
         $attributes .= ")";
         $values .= ")";
         

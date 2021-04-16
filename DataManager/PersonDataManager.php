@@ -5,19 +5,14 @@ require_once("DBController.php");
 
 class PersonDataManager
 {
-    public static function createPerson($PID, $PersonName) {
+    public static function createPerson($PersonName) {
         $query = "INSERT INTO PERSON";
         $attributes = "(";
         $values = " VALUES (";
         
-        $attributes .= "PID";
-        $values .= "".$PID."";
-        
-        if($PersonName != null) {
-            $attributes .= ", PNAME";
-            $values .= ", '".$PersonName."'";
-        }
-        
+        $attributes .= "PNAME";
+        $values .= "'".$PersonName."'";
+
         $attributes .= ")";
         $values .= ")";
         
