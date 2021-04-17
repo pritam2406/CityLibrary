@@ -69,12 +69,18 @@ class DocumentBorrowManager
     
     public static function getBorrowList($RID)
     {
-        //return array of borrowed docs sorted order
+        //return array of borrowed docs sorted orders
     }
     
-    public static function returnDocs($DocCopies)
+    public static function returnDocs($BOR_NO)
     {
-        //update RDTime
+        $query = "UPDATE BORROWING";
+        $query .= " SET RDTIME=NOW()";
+        $query .= " WHERE BOR_NO=".$BOR_NO;
+        
+        $resID = DBController::getInstance()->runQuery($query);
+
+        return $resID;
     }
     
     public static function calculateFine($RID)

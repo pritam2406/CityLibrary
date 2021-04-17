@@ -36,11 +36,50 @@ class DocumentCopyDataManager
     
     public static function getDocCopiesByBranch($DocID, $BID)
     {
-        //array of copy numbers
+        $query = "SELECT COPYNO";
+        $query .= " FROM COPY";
+        $query .= " WHERE DOCID = ".$DocID." AND BID = ".$BID;
+        
+        $res = DBController::getInstance()->runSelectQuery($query);
+        
+        $docCopies = array();
+        foreach ($res as $data)
+        {
+            array_push($availableDocs, $data['COPYNO']);
+        }
+            
+        return $docCopies;
     }
     
-    public static function availableDocsForReader($RID)
+    public static function availableDocsForReader()
     {
-        //$DOCID, $CopyNO, $BID, $Position, $isBorrowed
+        $query =
+        "SELECT *"
+        $query .=" FROM (((DOCUMENT NATURAL JOIN PUBLISHER) NATURAL JOIN COPY) NATURAL JOIN BRANCH)";
+        $query .=" WHERE (DOCID, COPYNO, BID) NOT IN";
+        $query .=" (SELECT DOCID, COPYNO, BID FROM BORROWS NATURAL JOIN BORROWING WHERE RDTIME IS NULL UNION SELECT DOCID, COPYNO, BID FROM RESERVES)";
+        
+        $res = DBController::getInstance()->runSelectQuery($query);
+        
+        $availableDocs = array();
+        foreach ($res as $data)
+        {
+            $dict = [
+                'BID' => $data["BID"],
+                'DOCID' => $data["DOCID"],
+                'PUBLISHERID' => $data["PUBLISHERID"],
+                'TITLE' => $data["TITLE"],
+                'PDATE' => $data["PDATE"],
+                'PUBNAME' => $data["PUBNAME"],
+                'ADDRESS' => $data["ADDRESS"],
+                'COPYNO' => $data["COPYNO"],
+                'POSITION' => $data["POSITION"],
+                'LNAME' => $data["LNAME"],
+                'LOCATION' => $data["LOCATION"]
+            ];
+            array_push($availableDocs, $dict);
+        }
+            
+        return $availableDocs;
     }
 }

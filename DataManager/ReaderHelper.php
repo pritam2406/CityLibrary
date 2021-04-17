@@ -1,6 +1,7 @@
 <?php
 
 include('DocumentBorrowManager.php');
+include('DocumentReserveManager.php');
     
 class ReaderHelper {
     
@@ -24,21 +25,21 @@ class ReaderHelper {
     }
     
     //Document checkout (borrow)
-    public static function checkoutDocs()
+    public static function checkoutDocs($docCopies, $RID)
     {
-        
+        return DocumentBorrowManager::borrowMultiDocs($docCopies, $RID)
     }
     
     //Document reserve
-    public static function reserveDocs()
+    public static function reserveDocs($docCopies, $RID)
     {
-        
+        return DocumentReserveManager::reserveMultiDocs($docCopies, $RID)
     }
     
     //Document return
-    public static function returnDocs()
+    public static function returnDocs($BOR_NO)
     {
-        
+        return DocumentBorrowManager::returnDocs($BOR_NO);
     }
     
     //Compute fine for a document copy borrowed by a reader based on the current date.

@@ -17,10 +17,31 @@ include('../DataManager/ReaderHelper.php');
     if(array_key_exists('computeFine', $_POST)) {
         computeFine();
     }
+    else if(array_key_exists('checkoutDocs', $_POST)) {
+        checkoutDocs();
+    }
+    else if(array_key_exists('reserveDocs', $_POST)) {
+        reserveDocs();
+    }
+    else if(array_key_exists('returnDocs', $_POST)) {
+        returnDocs();
+    }
     
     function computeFine() {
         $res = ReaderHelper::computeFine(1);
         echo "Total Fine ".$res;
+    }
+    
+    function checkoutDocs() {
+        ReaderHelper::checkoutDocs
+    }
+    
+    function reserveDocs() {
+        
+    }
+    
+    function returnDocs() {
+        
     }
 ?>
 
@@ -30,6 +51,9 @@ include('../DataManager/ReaderHelper.php');
             <div class="row">
                 <form method="post">
                     <input type="submit" name="computeFine" class="button" value="Compute Fine" />
+                    <input type="submit" name="checkoutDocs" class="button" value="Checkout Docs" />
+                    <input type="submit" name="reserveDocs" class="button" value="Reserve Docs" />
+                    <input type="submit" name="returnDocs" class="button" value="Return Docs" />
                 </form>
             </div>
         </div>
