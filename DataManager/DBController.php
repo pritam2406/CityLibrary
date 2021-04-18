@@ -5,7 +5,7 @@ class DBController {
     
 	private $host = "localhost";
 	private $user = "root";
-	private $password = "Pri@123456";
+	private $password = ""; //Blank password for Bilas
 	private $database = "city_library";
 	private $conn;
 	

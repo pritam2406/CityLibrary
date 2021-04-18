@@ -97,6 +97,11 @@ class AdminHelper {
         return BranchDataManager::createBranch($branchName, $branchLocation);
     }
     
+    public static function getAllBranches()
+    {
+        return BranchDataManager::getAllBranches();
+    }
+    
     public static function insertBook($title, $pDate, $publisherID, $ISBN, $authorPIDs)
     {
         return DocumentDataManager::insertBook($title, $pDate, $publisherID, $ISBN, $authorPIDs);
