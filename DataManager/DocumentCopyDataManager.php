@@ -54,7 +54,7 @@ class DocumentCopyDataManager
     public static function availableDocsForReader()
     {
         $query =
-        "SELECT *"
+        "SELECT *";
         $query .=" FROM (((DOCUMENT NATURAL JOIN PUBLISHER) NATURAL JOIN COPY) NATURAL JOIN BRANCH)";
         $query .=" WHERE (DOCID, COPYNO, BID) NOT IN";
         $query .=" (SELECT DOCID, COPYNO, BID FROM BORROWS NATURAL JOIN BORROWING WHERE RDTIME IS NULL UNION SELECT DOCID, COPYNO, BID FROM RESERVES)";
