@@ -98,4 +98,12 @@ class DocumentBorrowManager
         else
             return 0;
     }
+    
+    public static function updateReturnTime($BOR_NO) {
+        $query = "UPDATE BORROWING";
+        $query .= " SET RDTIME = NOW()";
+        $query .= " WHERE BOR_NO = ".$BOR_NO;
+        $res = DBController::getInstance()->runQuery($query);
+        return $res;
+    }
 }

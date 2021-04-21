@@ -32,16 +32,16 @@ include('../DataManager/ReaderHelper.php');
         echo "Total Fine ".$res;
     }
     
-    function checkoutDocs() {
-        ReaderHelper::checkoutDocs
+    function checkoutDocs($docCopies, $RID) {
+        ReaderHelper::checkoutDocs($docCopies, $RID);
     }
     
-    function reserveDocs() {
-        
+    function reserveDocs($docCopies, $RID) {
+        ReaderHelper::reserveDocs($docCopies, $RID);
     }
     
-    function returnDocs() {
-        
+    function returnDocs($BOR_NO) {
+        ReaderHelper::returnDocs($BOR_NO);
     }
 ?>
 

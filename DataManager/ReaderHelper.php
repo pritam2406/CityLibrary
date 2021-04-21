@@ -2,6 +2,7 @@
 
 include('DocumentBorrowManager.php');
 include('DocumentReserveManager.php');
+include('ReaderDataManager.php');
     
 class ReaderHelper {
     
@@ -27,13 +28,13 @@ class ReaderHelper {
     //Document checkout (borrow)
     public static function checkoutDocs($docCopies, $RID)
     {
-        return DocumentBorrowManager::borrowMultiDocs($docCopies, $RID)
+        return DocumentBorrowManager::borrowMultiDocs($docCopies, $RID);
     }
     
     //Document reserve
     public static function reserveDocs($docCopies, $RID)
     {
-        return DocumentReserveManager::reserveMultiDocs($docCopies, $RID)
+        return DocumentReserveManager::reserveMultiDocs($docCopies, $RID);
     }
     
     //Document return
@@ -55,6 +56,10 @@ class ReaderHelper {
     }
     
     //-------------------------------------------------------------//
+    public static function deleteReader($RID)
+    {
+        return ReaderDataManager::deleteReader($RID);
+    }
 }
 ?>
 

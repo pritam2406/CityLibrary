@@ -4,6 +4,15 @@ require_once("DBController.php");
 
 class DocumentCopyDataManager
 {
+    public static function insertMultipleDocCopies($DocID, $BID, $numCopies, $position)
+    {
+        $currentCopiesCount = DocumentCopyDataManager::getNumberOfCopiesInBranch($DocID, $BID);
+        foreach($numCopies as $num)
+        {
+            DocumentCopyDataManager::insertDocCopy($DocID, (int)$currentCopiesCount + (int)$num, $BID, $position);
+        }
+    }
+
     public static function insertDocCopy($DocID, $CopyNo, $BID, $Position)
     {
         $query = "INSERT INTO COPY";
@@ -49,6 +58,17 @@ class DocumentCopyDataManager
         }
             
         return $docCopies;
+    }
+    
+    public static function getNumberOfCopiesInBranch($DocID, $BID)
+    {
+        $query = "SELECT COUNT(COPYNO) AS NUM_COPIES";
+        $query .= " FROM COPY";
+        $query .= " WHERE DOCID = ".$DocID." AND BID = ".$BID;
+        
+        $res = DBController::getInstance()->runSelectQuery($query);
+
+        return $res['NUM_COPIES'];
     }
     
     public static function availableDocsForReader()

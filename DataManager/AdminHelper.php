@@ -7,7 +7,8 @@ include('PublisherDataManager.php');
 include('PersonDataManager.php');
 include('DocumentDataManager.php');
 include('DocumentCopyDataManager.php');
-
+include('DocumentReserveManager.php');
+    
 class AdminHelper {
     
     //- Add a document copy.
@@ -120,6 +121,26 @@ class AdminHelper {
     public static function insertJournalIssue($docID, $issueNo, $scope, $guestEditorPIDs)
     {
         return DocumentDataManager::insertJournalIssue($docID, $issueNo, $scope, $guestEditorPIDs);
+    }
+    
+    public static function deleteReader($RID)
+    {
+        return ReaderDataManager::deleteReader($RID);
+    }
+    
+    public static function getNumberOfCopiesInBranch($DocID, $BID)
+    {
+        return DocumentCopyDataManager::getNumberOfCopiesInBranch($DocID, $BID);
+    }
+    
+    public static function insertMultipleDocCopies($DocID, $BID, $numCopies, $position)
+    {
+        return DocumentCopyDataManager::insertMultipleDocCopies($DocID, $BID, $numCopies, $position);
+    }
+    
+    public static function clearExpiredReservations()
+    {
+        return DocumentReserveManager::clearExpiredReservations();
     }
 }
 ?>

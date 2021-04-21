@@ -23,7 +23,7 @@ class DocumentReserveManager
 
         $resID = DBController::getInstance()->runQuery($query);
 
-        for($docCopies as $docCopy)
+        foreach($docCopies as $docCopy)
         {
             reserveDoc($resID, $docCopy->getDocID(), $docCopy->getDocCopyNo(), $docCopy->getDocBID(), $RID);
         }
@@ -70,12 +70,21 @@ class DocumentReserveManager
         //return array of reserved docs sorted order
     }
     
-    public static function clearReservations($DocCopies)
+    public static function clearReservation($RES_NO)
     {
-        //remove from Reserves
+        $res = DBController::getInstance()->runQuery("DELETE FROM RESERVATION WHERE RES_NO= ".$RES_NO);
+        return $res;
     }
     
-    public static function updateReturnTime($BOR_NO) {
-        //
+    public static function clearExpiredReservations()
+    {
+        if (date('Hi') > 1800) {
+            $res = DBController::getInstance()->runQuery("DELETE FROM RESERVATION WHERE DTIME <= DATE(GETDATE())");
+        }
+        else {
+            $res = DBController::getInstance()->runQuery("DELETE FROM RESERVATION WHERE DTIME < DATE(GETDATE())");
+        }
     }
+    
+
 }
