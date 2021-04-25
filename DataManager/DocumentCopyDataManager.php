@@ -80,6 +80,54 @@ class DocumentCopyDataManager
         
     }
     
+    public static function availableDocsForReader($DocID, $Title, $PublisherName)
+    {
+        $query =
+        "SELECT *";
+        $query .=" FROM (((DOCUMENT NATURAL JOIN PUBLISHER) NATURAL JOIN COPY) NATURAL JOIN BRANCH)";
+        $query .=" WHERE (DOCID, COPYNO, BID) NOT IN";
+        $query .=" (SELECT DOCID, COPYNO, BID FROM BORROWS NATURAL JOIN BORROWING WHERE RDTIME IS NULL UNION SELECT DOCID, COPYNO, BID FROM RESERVES)";
+        
+        if($DocID != null)
+        {
+            $query .= " AND DOCID = ".$DocID;
+        }
+        
+        if($Title != null)
+        {
+            $query .= " AND TITLE = '".$Title."'";
+        }
+        
+        if($PublisherName != null)
+        {
+            $query .= " AND PUBNAME = '".$PublisherName."'";
+        }
+        
+        $res = DBController::getInstance()->runSelectQuery($query);
+        
+        $availableDocs = array();
+        foreach ($res as $data)
+        {
+            $dict = [
+                'BID' => $data["BID"],
+                'DOCID' => $data["DOCID"],
+                'PUBLISHERID' => $data["PUBLISHERID"],
+                'TITLE' => $data["TITLE"],
+                'PDATE' => $data["PDATE"],
+                'PUBNAME' => $data["PUBNAME"],
+                'ADDRESS' => $data["ADDRESS"],
+                'COPYNO' => $data["COPYNO"],
+                'POSITION' => $data["POSITION"],
+                'LNAME' => $data["LNAME"],
+                'LOCATION' => $data["LOCATION"]
+            ];
+            array_push($availableDocs, $dict);
+        }
+            
+        return $availableDocs;
+    }
+    
+    /*
     public static function availableDocsForReader()
     {
         $query =
@@ -111,4 +159,5 @@ class DocumentCopyDataManager
             
         return $availableDocs;
     }
+     */
 }

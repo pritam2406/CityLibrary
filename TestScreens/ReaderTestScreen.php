@@ -34,7 +34,7 @@ include('../DataManager/ReaderDataManager.php');
     }
     
     function insertReader() {
-        $res = ReaderDataManager::insertReader("1", "100", "Name1", null, "5512332414");
+        $res = ReaderDataManager::insertReaderInfo("1", "100", "Name1", null, "5512332414");
         if($res == 1) {
             echo "Reader created with RID 1";
         }

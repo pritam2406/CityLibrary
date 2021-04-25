@@ -5,7 +5,42 @@ require_once("DBController.php");
     
 class ReaderDataManager
 {
-    public static function insertReader($ReaderType, $ReaderName, $ReaderAddress, $ReaderPhone) {
+    public static function insertReader($ReaderType, $ReaderName, $ReaderAddress, $ReaderPhone, $Password)
+    {
+        $RID = ReaderDataManager::insertReaderInfo($ReaderType, $ReaderName, $ReaderAddress, $ReaderPhone);
+        
+        $UserID = ReaderDataManager::insertUser($RID, $ReaderPhone, $Password);
+        
+        return $RID;
+    }
+    
+    public static function insertUser($RID, $ReaderPhone, $Password)
+    {
+        $query = "INSERT INTO USER";
+        $attributes = "(";
+        $values = " VALUES (";
+        
+        $attributes .= "USER_MOBILE_NO";
+        $values .= "'".$ReaderPhone."'";
+        
+        $attributes .= ", PASSWORD";
+        $values .= ", '".$Password."'";
+        
+        $attributes .= ", RID";
+        $values .= ", ".$RID;
+        
+        $attributes .= ")";
+        $values .= ")";
+        
+        $query .= $attributes;
+        $query .= $values;
+        
+        $res = DBController::getInstance()->runQuery($query);
+        return $res;
+    }
+    
+    
+    public static function insertReaderInfo($ReaderType, $ReaderName, $ReaderAddress, $ReaderPhone) {
         
         $query = "INSERT INTO READER";
         $attributes = "(";

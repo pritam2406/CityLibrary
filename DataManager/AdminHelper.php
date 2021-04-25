@@ -18,10 +18,12 @@ class AdminHelper {
     }
     
     //- Add a reader
+    /*
     public static function addReader($readerType, $readerName, $readerAddress, $readerPhone)
     {
-        return ReaderDataManager::insertReader($readerType, $readerName, $readerAddress, $readerPhone);
+        return ReaderDataManager::insertReaderInfos($readerType, $readerName, $readerAddress, $readerPhone);
     }
+     */
     
     //- Print branch information (name and location).
     public static function printBranchInfo($BID)
@@ -151,6 +153,16 @@ class AdminHelper {
     public static function getAllDocIDs()
     {
         return DocumentDataManager::getAllDocIDs();
+    }
+    
+    public static function availableDocsForReader($DocID, $Title, $PublisherName)
+    {
+        return DocumentCopyDataManager::availableDocsForReader($DocID, $Title, $PublisherName);
+    }
+    
+    public static function insertReader($ReaderType, $ReaderName, $ReaderAddress, $ReaderPhone, $Password)
+    {
+        return ReaderDataManager::insertReader($ReaderType, $ReaderName, $ReaderAddress, $ReaderPhone, $Password);
     }
 }
 ?>
