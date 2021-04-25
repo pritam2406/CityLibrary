@@ -7,7 +7,8 @@ class DocumentCopyDataManager
     public static function insertMultipleDocCopies($DocID, $BID, $numCopies, $position)
     {
         $currentCopiesCount = DocumentCopyDataManager::getNumberOfCopiesInBranch($DocID, $BID);
-        foreach($numCopies as $num)
+        
+        for($num = 1; $num <= (int)$numCopies; $num++)
         {
             DocumentCopyDataManager::insertDocCopy($DocID, (int)$currentCopiesCount + (int)$num, $BID, $position);
         }
@@ -67,8 +68,16 @@ class DocumentCopyDataManager
         $query .= " WHERE DOCID = ".$DocID." AND BID = ".$BID;
         
         $res = DBController::getInstance()->runSelectQuery($query);
-
-        return $res['NUM_COPIES'];
+        
+        if(count($res) > 0)
+        {
+            return $res[0]['NUM_COPIES'];
+        }
+        else
+        {
+            return 0;
+        }
+        
     }
     
     public static function availableDocsForReader()
