@@ -164,6 +164,11 @@ class AdminHelper {
     {
         return ReaderDataManager::insertReader($ReaderType, $ReaderName, $ReaderAddress, $ReaderPhone, $Password);
     }
+    
+    public static function getUserRID($ReaderPhone, $Password)
+    {
+        return ReaderDataManager::getUserRID($ReaderPhone, $Password);
+    }
 }
 ?>
 

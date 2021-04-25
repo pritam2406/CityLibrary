@@ -14,6 +14,19 @@ class ReaderDataManager
         return $RID;
     }
     
+    public static function getUserRID($ReaderPhone, $Password)
+    {
+        $query = "SELECT RID";
+        $query .= " FROM USERS";
+        $query .= " WHERE USER_MOBILE_NO='".$ReaderPhone."' AND PASSWORD='".$Password."'";
+        
+        $res = DBController::getInstance()->runSelectQuery($query);
+        if (count($res) > 0)
+            return $res[0]['RID'];
+        else
+            return null;
+    }
+    
     public static function insertUser($RID, $ReaderPhone, $Password)
     {
         $query = "INSERT INTO USER";
