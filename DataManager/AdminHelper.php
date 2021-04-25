@@ -155,11 +155,6 @@ class AdminHelper {
         return DocumentDataManager::getAllDocIDs();
     }
     
-    public static function availableDocsForReader($DocID, $Title, $PublisherName)
-    {
-        return DocumentCopyDataManager::availableDocsForReader($DocID, $Title, $PublisherName);
-    }
-    
     public static function insertReader($ReaderType, $ReaderName, $ReaderAddress, $ReaderPhone, $Password)
     {
         return ReaderDataManager::insertReader($ReaderType, $ReaderName, $ReaderAddress, $ReaderPhone, $Password);

@@ -29,7 +29,7 @@ class ReaderDataManager
     
     public static function insertUser($RID, $ReaderPhone, $Password)
     {
-        $query = "INSERT INTO USER";
+        $query = "INSERT INTO USERS";
         $attributes = "(";
         $values = " VALUES (";
         

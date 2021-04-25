@@ -3,26 +3,32 @@
 include('DocumentBorrowManager.php');
 include('DocumentReserveManager.php');
 include('ReaderDataManager.php');
+include('DocumentCopyDataManager.php');
     
 class ReaderHelper {
+    
+    public static function availableDocsForReader($DocID, $Title, $PublisherName)
+    {
+        return DocumentCopyDataManager::availableDocsForReader($DocID, $Title, $PublisherName);
+    }
     
     //Search a document by ID.
     public static function searchDocByID($docID)
     {
-        
+        return DocumentCopyDataManager::availableDocsForReader($docID, null, null);
     }
     
     //Search a document by title.
     public static function searchDocByTitle($docTitle)
     {
-        
+        return DocumentCopyDataManager::availableDocsForReader(null, $docTitle, null);
     }
     
     //Search a document by publisher name.
     //Print the document id and document titles of documents published by a publisher
     public static function searchDocByPublisherName($pubName)
     {
-        
+        return DocumentCopyDataManager::availableDocsForReader(null, null, $pubName);
     }
     
     //Document checkout (borrow)
