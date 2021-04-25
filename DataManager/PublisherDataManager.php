@@ -1,6 +1,6 @@
 <?php
 
-include('../DataModel/PublisherData.php');
+include('DataModel/PublisherData.php');
 require_once("DBController.php");
     
 class PublisherDataManager

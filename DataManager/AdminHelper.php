@@ -142,6 +142,16 @@ class AdminHelper {
     {
         return DocumentReserveManager::clearExpiredReservations();
     }
+    
+    public static function getAllBranchIds()
+    {
+        return BranchDataManager::getAllBranchIDs();
+    }
+    
+    public static function getAllDocIDs()
+    {
+        return DocumentDataManager::getAllDocIDs();
+    }
 }
 ?>
 

@@ -1,6 +1,6 @@
 <?php
 
-include('../DataModel/BranchData.php');
+include('DataModel/BranchData.php');
 require_once("DBController.php");
 
     
@@ -34,6 +34,15 @@ class BranchDataManager {
             array_push($branches, new BranchData($data));
         }
         return $branches;
+    }
+    
+    public static function getAllBranchIDs() {
+        $branchIDs = array();
+        $res = DBController::getInstance()->runSelectQuery("SELECT BID FROM BRANCH");
+        foreach ($res as $data) {
+            array_push($branchIDs, $data["BID"]);
+        }
+        return $branchIDs;
     }
 
     public static function getBranchInfo($BID) {

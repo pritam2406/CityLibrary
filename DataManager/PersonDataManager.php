@@ -1,6 +1,6 @@
 <?php
 
-include('../DataModel/PersonData.php');
+include('DataModel/PersonData.php');
 require_once("DBController.php");
 
 class PersonDataManager

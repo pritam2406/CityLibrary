@@ -212,6 +212,16 @@ class DocumentDataManager
         return $res;
     }
     
+    public static function getAllDocIDs()
+    {
+        $docIDs = array();
+        $res = DBController::getInstance()->runSelectQuery("SELECT DOCID FROM DOCUMENT");
+        foreach ($res as $data) {
+            array_push($docIDs, $data["DOCID"]);
+        }
+        return $docIDs;
+    }
+    
     public static function getAllBooks() {
         
     }

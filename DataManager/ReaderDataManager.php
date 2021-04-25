@@ -1,6 +1,6 @@
 <?php
 
-include('../DataModel/ReaderData.php');
+include('DataModel/ReaderData.php');
 require_once("DBController.php");
     
 class ReaderDataManager
