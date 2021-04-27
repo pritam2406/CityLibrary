@@ -32,11 +32,55 @@ include('../DataManager/ReaderHelper.php');
         echo "Total Fine ".$res;
     }
     
-    function checkoutDocs($docCopies, $RID) {
+    function checkoutDocs() {
+        $RID = 1;
+        
+        $docCopies = array();
+
+        //for loop
+        $data1 = [
+            'DOCID' => 8,
+            'COPYNO' => 1,
+            'BID' => 1,
+        ];
+        $docCopy1 = new DocumentCopyData($data1);
+        array_push($docCopies, $docCopy1);
+        
+        $data2 = [
+            'DOCID' => 9,
+            'COPYNO' => 2,
+            'BID' => 1,
+        ];
+        $docCopy2 = new DocumentCopyData($data2);
+        
+        array_push($docCopies, $docCopy2);
+        
         ReaderHelper::checkoutDocs($docCopies, $RID);
     }
     
-    function reserveDocs($docCopies, $RID) {
+    function reserveDocs() {
+        $RID = 1;
+        
+        $docCopies = array();
+
+        //for loop
+        $data1 = [
+            'DOCID' => 8,
+            'COPYNO' => 1,
+            'BID' => 1,
+        ];
+        $docCopy1 = new DocumentCopyData($data1);
+        array_push($docCopies, $docCopy1);
+        
+        $data2 = [
+            'DOCID' => 9,
+            'COPYNO' => 2,
+            'BID' => 1,
+        ];
+        $docCopy2 = new DocumentCopyData($data2);
+        
+        array_push($docCopies, $docCopy2);
+        
         ReaderHelper::reserveDocs($docCopies, $RID);
     }
     

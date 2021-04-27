@@ -1,7 +1,8 @@
 <?php
 
 require_once("DBController.php");
-
+include("DataModel/DocumentCopyData.php");
+    
 class DocumentBorrowManager
 {
     
@@ -15,7 +16,7 @@ class DocumentBorrowManager
         //$values .= "".$resID."";
         
         $attributes .= "BDTIME";
-        $values .= ", NOW()";
+        $values .= "NOW()";
         
         $attributes .= ")";
         $values .= ")";
@@ -28,7 +29,7 @@ class DocumentBorrowManager
         
         foreach($docCopies as $docCopy)
         {
-            borrowDoc($resID, $docCopy->getDocID(), $docCopy->getDocCopyNo(), $docCopy->getDocBID(), $RID);
+            DocumentBorrowManager::borrowDoc($resID, $docCopy->getDocID(), $docCopy->getDocCopyNo(), $docCopy->getDocBID(), $RID);
         }
     }
     

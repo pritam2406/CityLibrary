@@ -25,7 +25,7 @@ class DocumentReserveManager
 
         foreach($docCopies as $docCopy)
         {
-            reserveDoc($resID, $docCopy->getDocID(), $docCopy->getDocCopyNo(), $docCopy->getDocBID(), $RID);
+            DocumentReserveManager::reserveDoc($resID, $docCopy->getDocID(), $docCopy->getDocCopyNo(), $docCopy->getDocBID(), $RID);
         }
     }
     

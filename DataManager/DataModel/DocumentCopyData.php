@@ -17,7 +17,7 @@ class DocumentCopyData
     }
     
     public function getDocID() {
-        return $this->DOCID;
+        return $this->DocID;
     }
 
     public function getDocCopyNo() {
