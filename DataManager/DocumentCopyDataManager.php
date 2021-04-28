@@ -95,12 +95,12 @@ class DocumentCopyDataManager
         
         if($Title != null)
         {
-            $query .= " AND TITLE = '".$Title."'";
+            $query .= " AND TITLE LIKE '%".$Title."%'";
         }
         
         if($PublisherName != null)
         {
-            $query .= " AND PUBNAME = '".$PublisherName."'";
+            $query .= " AND PUBNAME LIKE '%".$PublisherName."%'";
         }
         
         $res = DBController::getInstance()->runSelectQuery($query);

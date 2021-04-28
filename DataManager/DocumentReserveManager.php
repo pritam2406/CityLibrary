@@ -68,7 +68,7 @@ class DocumentReserveManager
     public static function getReservationList($RID)
     {
         //return array of reserved docs sorted order
-        $query = "SELECT RES_NO, DTIME";
+        $query = "SELECT DISTINCT RES_NO, DTIME";
         $query .= " FROM RESERVATION NATURAL JOIN RESERVES";
         $query .= " WHERE RID=".$RID;
         $query .= " ORDER BY DTIME DESC";

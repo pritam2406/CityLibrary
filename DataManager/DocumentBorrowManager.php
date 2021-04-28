@@ -71,7 +71,7 @@ class DocumentBorrowManager
     public static function getBorrowList($RID)
     {
         //return array of reserved docs sorted order
-        $query = "SELECT BOR_NO, BDTIME";
+        $query = "SELECT DISTINCT BOR_NO, BDTIME";
         $query .= " FROM BORROWING NATURAL JOIN BORROWS";
         $query .= " WHERE RDTIME IS NULL AND RID=".$RID;
         $query .= " ORDER BY BDTIME DESC";
