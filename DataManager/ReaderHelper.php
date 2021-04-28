@@ -66,6 +66,26 @@ class ReaderHelper {
     {
         return ReaderDataManager::deleteReader($RID);
     }
+    
+    public static function getReservedDocList($RES_NO)
+    {
+        return DocumentReserveManager::getReservedDocList($RES_NO);
+    }
+    
+    public static function getReservationList($RID)
+    {
+        return DocumentReserveManager::getReservationList($RID);
+    }
+    
+    public static function getBorrowedDocList($BOR_NO)
+    {
+        return DocumentBorrowManager::getBorrowedDocList($BOR_NO);
+    }
+    
+    public static function getBorrowList($RID)
+    {
+        return DocumentBorrowManager::getBorrowList($RID);
+    }
 }
 ?>
 

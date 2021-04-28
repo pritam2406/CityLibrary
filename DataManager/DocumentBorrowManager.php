@@ -70,7 +70,44 @@ class DocumentBorrowManager
     
     public static function getBorrowList($RID)
     {
-        //return array of borrowed docs sorted orders
+        //return array of reserved docs sorted order
+        $query = "SELECT BOR_NO, BDTIME";
+        $query .= " FROM BORROWING NATURAL JOIN BORROWS";
+        $query .= " WHERE RDTIME IS NULL AND RID=".$RID;
+        $query .= " ORDER BY BDTIME DESC";
+        
+        $res = DBController::getInstance()->runSelectQuery($query);
+        $borrowList = array();
+        foreach ($res as $data) {
+            $dict = [
+                'BOR_NO' => $data["BOR_NO"],
+                'BDTIME' => $data["BDTIME"]
+            ];
+            array_push($borrowList, $dict);
+        }
+        
+        return $borrowList;
+    }
+    
+    public static function getBorrowedDocList($BOR_NO)
+    {
+        $query = "SELECT TITLE, COPYNO, PUBNAME, LNAME";
+        $query .= " FROM (((BORROWS NATURAL JOIN DOCUMENT) NATURAL JOIN PUBLISHER) NATURAL JOIN BRANCH)";
+        $query .= " WHERE BOR_NO=".$BOR_NO;
+        
+        $res = DBController::getInstance()->runSelectQuery($query);
+        $borrowedDocList = array();
+        foreach ($res as $data) {
+            $dict = [
+                'TITLE' => $data["TITLE"],
+                'COPYNO' => $data["COPYNO"],
+                'PUBNAME' => $data["PUBNAME"],
+                'LNAME' => $data["LNAME"]
+            ];
+            array_push($borrowedDocList, $dict);
+        }
+        
+        return $borrowedDocList;
     }
     
     public static function returnDocs($BOR_NO)

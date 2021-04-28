@@ -65,9 +65,46 @@ class DocumentReserveManager
         return $resID;
     }
     
-    public static function getReservedList($RID)
+    public static function getReservationList($RID)
     {
         //return array of reserved docs sorted order
+        $query = "SELECT RES_NO, DTIME";
+        $query .= " FROM RESERVATION NATURAL JOIN RESERVES";
+        $query .= " WHERE RID=".$RID;
+        $query .= " ORDER BY DTIME DESC";
+        
+        $res = DBController::getInstance()->runSelectQuery($query);
+        $reservationList = array();
+        foreach ($res as $data) {
+            $dict = [
+                'RES_NO' => $data["RES_NO"],
+                'DTIME' => $data["DTIME"]
+            ];
+            array_push($reservationList, $dict);
+        }
+        
+        return $reservationList;
+    }
+    
+    public static function getReservedDocList($RES_NO)
+    {
+        $query = "SELECT TITLE, COPYNO, PUBNAME, LNAME";
+        $query .= " FROM (((RESERVATION NATURAL JOIN DOCUMENT) NATURAL JOIN PUBLISHER) NATURAL JOIN BRANCH)";
+        $query .= " WHERE RES_NO=".$RES_NO;
+        
+        $res = DBController::getInstance()->runSelectQuery($query);
+        $reservedDocList = array();
+        foreach ($res as $data) {
+            $dict = [
+                'TITLE' => $data["TITLE"],
+                'COPYNO' => $data["COPYNO"],
+                'PUBNAME' => $data["PUBNAME"],
+                'LNAME' => $data["LNAME"]
+            ];
+            array_push($reservedDocList, $dict);
+        }
+        
+        return $reservedDocList;
     }
     
     public static function clearReservation($RES_NO)
