@@ -38,7 +38,7 @@ class DocumentReserveManager
         $attributes = "(";
         $values = " VALUES (";
         
-        $attributes .= "RESERVATION_NO";
+        $attributes .= "RES_NO";
         $values .= "".$RESERVATION_NO."";
         
         $attributes .= ", DOCID";
@@ -88,10 +88,9 @@ class DocumentReserveManager
     
     public static function getReservedDocList($RES_NO)
     {
-        $query = "SELECT TITLE, COPYNO, PUBNAME, LNAME";
-        $query .= " FROM (((RESERVATION NATURAL JOIN DOCUMENT) NATURAL JOIN PUBLISHER) NATURAL JOIN BRANCH)";
+        $query = "SELECT TITLE, DOCID, COPYNO, BID, PUBNAME, LNAME";
+        $query .= " FROM (((RESERVES NATURAL JOIN DOCUMENT) NATURAL JOIN PUBLISHER) NATURAL JOIN BRANCH)";
         $query .= " WHERE RES_NO=".$RES_NO;
-        
         $res = DBController::getInstance()->runSelectQuery($query);
         $reservedDocList = array();
         foreach ($res as $data) {
@@ -99,7 +98,9 @@ class DocumentReserveManager
                 'TITLE' => $data["TITLE"],
                 'COPYNO' => $data["COPYNO"],
                 'PUBNAME' => $data["PUBNAME"],
-                'LNAME' => $data["LNAME"]
+                'LNAME' => $data["LNAME"],
+                'DOCID' => $data["DOCID"],
+                'BID' => $data["BID"]
             ];
             array_push($reservedDocList, $dict);
         }

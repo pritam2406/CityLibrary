@@ -86,6 +86,31 @@ class ReaderHelper {
     {
         return DocumentBorrowManager::getBorrowList($RID);
     }
+    
+    public static function borrowReservedDocs($RES_NO, $RID)
+    {
+        $res = DocumentReserveManager::getReservedDocList($RES_NO);
+        
+        $docCopies = array();
+        foreach ($res as $row) {
+            $data = [
+                'DOCID' => $row['DOCID'],
+                'COPYNO' => $row['COPYNO'],
+                'BID' => $row['BID'],
+                'POSITION' => "",
+            ];
+            $docCopy = new DocumentCopyData($data);
+            array_push($docCopies, $docCopy);
+        }
+
+        DocumentBorrowManager::borrowMultiDocs($docCopies, $RID);
+        DocumentReserveManager::clearReservation($RES_NO);
+    }
+    
+    public static function returnReservedDocs($RES_NO)
+    {
+        DocumentReserveManager::clearReservation($RES_NO);
+    }
 }
 ?>
 

@@ -62,7 +62,6 @@ class DBController {
 	}
 }
 ?>
-
 </div>
 </BODY>
 </HTML>
