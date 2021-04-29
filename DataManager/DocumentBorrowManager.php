@@ -132,7 +132,13 @@ class DocumentBorrowManager
         
         $res = DBController::getInstance()->runSelectQuery($query);
         if (count($res) > 0)
-            return $res[0]["FINE"];
+        {
+            $fine = 0;
+            if($res[0]["FINE"] != null) {
+                $fine = $res[0]["FINE"];
+            }
+            return $fine;
+        }
         else
             return 0;
     }
