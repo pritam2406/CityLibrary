@@ -116,8 +116,13 @@ class DocumentReserveManager
     
     public static function clearExpiredReservations()
     {
-        if (date('Hi') > 1800) {
-            $res = DBController::getInstance()->runQuery("DELETE FROM RESERVATION WHERE DTIME <= DATE(GETDATE())");
+        $currentHour = (date("H") + 20) % 24 ; # 20 for USA (GMT - 4)
+        
+        if ($currentHour >= 18) {
+            $dateBefore6PM = "DATE_ADD(CURDATE(), INTERVAL 18 HOUR)";
+            $query = "DELETE FROM RESERVATION WHERE DTIME <=";
+            $query .= $dateBefore6PM;
+            $res = DBController::getInstance()->runQuery($query);
         }
         else {
             $res = DBController::getInstance()->runQuery("DELETE FROM RESERVATION WHERE DTIME < DATE(GETDATE())");
