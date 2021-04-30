@@ -113,7 +113,3 @@ class ReaderHelper {
     }
 }
 ?>
-
-</div>
-</BODY>
-</HTML>

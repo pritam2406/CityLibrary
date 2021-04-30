@@ -53,7 +53,10 @@ class CommonDataManager
     {
         $query = "SELECT RID, RNAME, COUNT(*) AS NUM_DOCS";
         $query .= " FROM BORROWS NATURAL JOIN READER";
-        $query .= " WHERE BID = ".$BID;
+        if($BID != null)
+        {
+            $query .= " WHERE BID = ".$BID;
+        }
         $query .= " GROUP BY RID, RNAME";
         $query .= " ORDER BY NUM_DOCS DESC";
         $query .= " LIMIT ".$topN;
@@ -100,7 +103,10 @@ class CommonDataManager
     {
         $query = "SELECT DOCID, TITLE, PDATE, PUBNAME, COUNT(*) AS NUM_DOCS";
         $query .= " FROM ((BORROWS NATURAL JOIN DOCUMENT) NATURAL JOIN PUBLISHER)";
-        $query .= " WHERE BID = ".$BID;
+        if($BID != null)
+        {
+            $query .= " WHERE BID = ".$BID;
+        }
         $query .= " GROUP BY DOCID";
         $query .= " ORDER BY NUM_DOCS DESC";
         $query .= " LIMIT ".$topN;
@@ -149,12 +155,12 @@ class CommonDataManager
     
     public static function calculateAvgFine($startDate, $endDate)
     {
-        $delayLimit = 5;
+        $delayLimit = 20;
         $fineForEachDay = 20; //20 cents
         
-        $query = "SELECT BID, LNAME, AVG((DATEDIFF(NOW(), BDTIME) - ".$delayLimit.") * ".$fineForEachDay.") AS AVG_FINE";
+        $query = "SELECT BID, LNAME, AVG((DATEDIFF(RDTIME, BDTIME) - ".$delayLimit.") * ".$fineForEachDay.") AS AVG_FINE";
         $query .= " FROM (BORROWS NATURAL JOIN BORROWING) NATURAL JOIN BRANCH";
-        $query .= " WHERE RDTIME IS NULL AND (BDTIME BETWEEN '".$startDate."' AND '".$endDate."') AND DATEDIFF(NOW(), BDTIME) > ".$delayLimit;
+        $query .= " WHERE RDTIME IS NOT NULL AND (BDTIME BETWEEN '".$startDate."' AND '".$endDate."') AND DATEDIFF(RDTIME, BDTIME) > ".$delayLimit;
         $query .= " GROUP BY BID, LNAME";
               
         $res = DBController::getInstance()->runSelectQuery($query);

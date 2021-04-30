@@ -123,7 +123,7 @@ class DocumentBorrowManager
     
     public static function calculateFine($RID)
     {
-        $delayLimit = 5;
+        $delayLimit = 20;
         $fineForEachDay = 20; //20 cents
         
         $query = "SELECT SUM((DATEDIFF(NOW(), BDTIME) - ".$delayLimit.") * ".$fineForEachDay.") AS FINE";

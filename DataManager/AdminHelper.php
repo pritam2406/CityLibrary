@@ -166,7 +166,3 @@ class AdminHelper {
     }
 }
 ?>
-
-</div>
-</BODY>
-</HTML>

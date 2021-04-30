@@ -80,7 +80,3 @@ class BranchDataManager {
     }
 }
 ?>
-
-</div>
-</BODY>
-</HTML>

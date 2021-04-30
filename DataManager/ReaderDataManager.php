@@ -42,6 +42,9 @@ class ReaderDataManager
         $attributes .= ", RID";
         $values .= ", ".$RID;
         
+        $attributes .= ", id";
+        $values .= ", ".$RID;
+        
         $attributes .= ")";
         $values .= ")";
         
