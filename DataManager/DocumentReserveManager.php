@@ -125,7 +125,7 @@ class DocumentReserveManager
             $res = DBController::getInstance()->runQuery($query);
         }
         else {
-            $res = DBController::getInstance()->runQuery("DELETE FROM RESERVATION WHERE DTIME < DATE(GETDATE())");
+            $res = DBController::getInstance()->runQuery("DELETE FROM RESERVATION WHERE DTIME < DATE(CURDATE())");
         }
     }
     

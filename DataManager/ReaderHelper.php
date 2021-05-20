@@ -111,5 +111,10 @@ class ReaderHelper {
     {
         DocumentReserveManager::clearReservation($RES_NO);
     }
+    
+    public static function clearExpiredReservations()
+    {
+        return DocumentReserveManager::clearExpiredReservations();
+    }
 }
 ?>

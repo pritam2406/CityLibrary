@@ -158,11 +158,11 @@ class CommonDataManager
         $delayLimit = 20;
         $fineForEachDay = 20; //20 cents
         
-        $query = "SELECT BID, LNAME, AVG((DATEDIFF(RDTIME, BDTIME) - ".$delayLimit.") * ".$fineForEachDay.") AS AVG_FINE";
+        $query = "SELECT BID, LNAME, SUM((DATEDIFF(RDTIME, BDTIME) - ".$delayLimit.") * ".$fineForEachDay.") / COUNT(DISTINCT(RID)) AS AVG_FINE";
         $query .= " FROM (BORROWS NATURAL JOIN BORROWING) NATURAL JOIN BRANCH";
-        $query .= " WHERE RDTIME IS NOT NULL AND (BDTIME BETWEEN '".$startDate."' AND '".$endDate."') AND DATEDIFF(RDTIME, BDTIME) > ".$delayLimit;
+        $query .= " WHERE RDTIME IS NOT NULL AND (YEAR(BDTIME) BETWEEN '".$startDate."' AND '".$endDate."') AND DATEDIFF(RDTIME, BDTIME) > ".$delayLimit;
         $query .= " GROUP BY BID, LNAME";
-              
+        
         $res = DBController::getInstance()->runSelectQuery($query);
         
         $avgFineList = array();
